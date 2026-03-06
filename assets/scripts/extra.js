@@ -39,82 +39,7 @@
             (0,
             c.$)("#tela").style.display = "")
         }
-        function i() {
-            function e() {
-                pbjs.initAdserverSet || (pbjs.initAdserverSet = !0,
-                googletag.cmd.push(function() {
-                    pbjs.que.push(function() {
-                        pbjs.setTargetingForGPTAsync(),
-                        googletag.pubads().refresh()
-                    })
-                }))
-            }
-            function t() {
-                i && clearInterval(i),
-                i = setInterval(function() {
-                    pbjs.que.push(function() {
-                        pbjs.requestBids({
-                            bidsBackHandler: function() {
-                                pbjs.setTargetingForGPTAsync(),
-                                googletag.pubads().refresh()
-                            },
-                            timeout: n
-                        })
-                    })
-                }, 9e4)
-            }
-            var n = 2e3
-              , o = [{
-                code: "/245385116/Gartic_PWA",
-                mediaTypes: {
-                    banner: {
-                        sizes: [320, 50]
-                    }
-                },
-                bids: [{
-                    bidder: "appnexus",
-                    params: {
-                        placementId: 13728724
-                    }
-                }, {
-                    bidder: "criteo",
-                    params: {
-                        networkId: 1521907
-                    }
-                }]
-            }];
-            googletag.cmd.push(function() {
-                googletag.pubads().disableInitialLoad()
-            }),
-            pbjs.que.push(function() {
-                pbjs.setConfig({
-                    priceGranularity: "dense"
-                }),
-                pbjs.addAdUnits(o),
-                pbjs.requestBids({
-                    bidsBackHandler: e
-                })
-            });
-            var i = !1;
-            setTimeout(function() {
-                e(),
-                t()
-            }, n),
-            document.addEventListener("visibilitychange", function() {
-                document.hidden ? (i && clearInterval(i),
-                i = !1) : i || t()
-            }, !1),
-            googletag.cmd.push(function() {
-                u = googletag.defineOutOfPageSlot("/245385116/teste", googletag.enums.OutOfPageFormat.INTERSTITIAL),
-                u && u.addService(googletag.pubads()),
-                googletag.defineSlot("/245385116/Gartic_PWA", [320, 50], "div-gpt-ad-1533918100755-0").addService(googletag.pubads()),
-                googletag.pubads().enableSingleRequest(),
-                googletag.enableServices()
-            }),
-            googletag.cmd.push(function() {
-                googletag.display("div-gpt-ad-1533918100755-0")
-            })
-        }
+        
         var r = e("fastclick")
           , a = function(e) {
             return e && e.__esModule ? e : {
@@ -122,8 +47,8 @@
             }
         }(r)
           , c = e("./includes/util.js")
-          , s = location.pathname
-          , u = void 0;
+          , s = location.pathname;
+          
         window.PLATAFORMA = 4,
         window.ENDERECO = "https://gartic.com.br/",
         window.addEventListener("DOMContentLoaded", o, !1),
@@ -147,18 +72,15 @@
             }),
             /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && (0,
             a.default)(document.body);
+            
             var e = "";
             -1 != s.search(/^\/0[0-9]+$/) ? window.handleOpenURL("https://gartic.com.br" + s) : -1 != ["contato", "opcoes", "tiposSala", "regras", "privacidade", "seguranca", "ranking", "escolherSala"].indexOf(s.replace("/", "")) && (e = s.replace("/", "")),
+            
             window.carregar(function() {
                 e && tela.abrir(e)
-            }),
-            i(),
-            window.tela.on("preload", function(e, t) {
-                "jogo" == e && u && googletag.cmd.push(function() {
-                    googletag.display(u)
-                })
             })
         }, !1),
+        
         window.fbAsyncInit = function() {
             FB.init({
                 appId: "1224974710879255",
