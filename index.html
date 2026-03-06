@@ -1,1 +1,61 @@
-<!DOCTYPE html><html><head><title>Gartic</title><link rel="stylesheet" type="text/css" href="assets/styles/main.css"><meta name="viewport" content="width=320, user-scalable=no"><meta name="theme-color" content="#003366"><meta name="mobile-web-app-capable" content="yes"><meta charset="utf-8"></head><body><div id="tela"><div id="telaRolagem"></div><div class="carregando" id="popUp"><header><h1></h1><h2></h2></header><div class="fechar"></div><div class="cont-centro"><div class="scroll"><div class="table"><div class="vertAlign"></div></div></div></div><div id="carregando"><div class="anima"></div></div><div class="cont-bottom"><button class="btnMedio"></button><button class="btnMedio"></button><button class="btnGrande"></button><div class="check"><input class="checkbox-custom" id="checkbox-2" name="checkbox-2" type="checkbox"><label class="checkbox-custom-label" for="checkbox-2"></label></div></div></div></div><div id="banner"></div><script type="text/javascript" src="cordova.js"></script><script type="text/javascript" src="assets/scripts/extra.js"></script><script type="text/javascript" src="assets/scripts/app.js"></script></body></html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gartic PWA</title>
+        <link rel="stylesheet" type="text/css" href="assets/styles/main.css">
+        <link rel="manifest" href="manifest.json">
+        <meta name="viewport" content="width=320, user-scalable=no">
+        <meta name="theme-color" content="#003366">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta charset="utf-8">
+        <link rel="icon" sizes="192x192" href="assets/images/icons/192.png">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Gartic">
+        <link rel="apple-touch-icon" href="assets/images/icons/ios152.png">
+        <meta name="msapplication-TileImage" content="assets/images/icons/wp144.png">
+        <meta name="msapplication-TileColor" content="#003366">
+    </head>
+    <body>
+        <div id="tela">
+            <div id="telaRolagem"></div>
+            <div class="carregando" id="popUp">
+                <header>
+                    <h1></h1>
+                    <h2></h2>
+                </header>
+                <div class="fechar"></div>
+                <div class="cont-centro">
+                    <div class="scroll">
+                        <div class="table">
+                            <div class="vertAlign"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="carregando">
+                    <div class="anima"></div>
+                </div>
+                <div class="cont-bottom">
+                    <button class="btnMedio"></button>
+                    <button class="btnMedio"></button>
+                    <button class="btnGrande"></button>
+                    <div class="check">
+                        <input class="checkbox-custom" id="checkbox-2" name="checkbox-2" type="checkbox">
+                        <label class="checkbox-custom-label" for="checkbox-2"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="aviso-rotacao">
+            <div class="table">
+                <div class="vertAlign">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="assets/scripts/sdk.js"></script>
+        <script type="text/javascript" src="assets/scripts/extra.js"></script>
+        <script type="text/javascript" src="assets/scripts/app.js"></script>
+    </body>
+</html>
