@@ -101,7 +101,7 @@
                                 var n = {
                                     nick: localStorage.getItem('nick'),
                                     senha: localStorage.getItem('senha'),
-                                    avatar: localStorage.getItem('desenho'),
+                                    desenho: localStorage.getItem('desenho'),
                                     email: localStorage.getItem('email')
                                 };
                                 localStorage.setItem('_temp_user_data', JSON.stringify(n));
