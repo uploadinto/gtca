@@ -29,7 +29,6 @@
 }()({
     1: [function(e, t, n) {
         "use strict";
-        
         function o() {
             var e = Math.abs(window.orientation);
             90 == e || 270 == e ? ((0,
@@ -39,39 +38,6 @@
             c.$)("#aviso-rotacao").style.display = "",
             (0,
             c.$)("#tela").style.display = "")
-        }
-        
-        function v() {
-            if ('serviceWorker' in navigator) {
-                var e = localStorage.getItem('app_version');
-                if (e) {
-                    console.log('App versão:', e);
-                }
-                
-                navigator.serviceWorker.addEventListener('message', function(event) {
-                    if (event.data.type === 'VERSION_CHECK') {
-                        console.log('Service Worker versão:', event.data.version);
-                        if (localStorage.getItem('app_version') !== event.data.version) {
-                            localStorage.setItem('app_version', event.data.version);
-                        }
-                    }
-                });
-                
-                var t = localStorage.getItem('_temp_user_data');
-                if (t) {
-                    try {
-                        var n = JSON.parse(t);
-                        Object.keys(n).forEach(function(e) {
-                            if (n[e]) {
-                                localStorage.setItem(e, n[e]);
-                            }
-                        });
-                        localStorage.removeItem('_temp_user_data');
-                    } catch (e) {
-                        console.error('Erro ao recuperar dados temporários:', e);
-                    }
-                }
-            }
         }
         
         var r = e("fastclick")
@@ -88,26 +54,13 @@
         window.addEventListener("DOMContentLoaded", o, !1),
         window.addEventListener("orientationchange", o, !1),
         window.addEventListener("load", function() {
-            v();
-            
             "serviceWorker"in navigator && navigator.serviceWorker.register("service-worker.js").then(function(e) {
                 e.onupdatefound = function() {
                     var t = e.installing;
                     t.onstatechange = function() {
                         switch (t.state) {
                         case "installed":
-                            if (navigator.serviceWorker.controller) {
-                                console.log("New or updated content is available.");
-                                var n = {
-                                    nick: localStorage.getItem('nick'),
-                                    senha: localStorage.getItem('senha'),
-                                    desenho: localStorage.getItem('desenho'),
-                                    email: localStorage.getItem('email')
-                                };
-                                localStorage.setItem('_temp_user_data', JSON.stringify(n));
-                            } else {
-                                console.log("Content is now available offline!");
-                            }
+                            navigator.serviceWorker.controller ? console.log("New or updated content is available.") : console.log("Content is now available offline!");
                             break;
                         case "redundant":
                             console.error("The installing service worker became redundant.")
