@@ -34,26 +34,27 @@
                 default: t
             }
         }
-   function r(t) {
+function r(t) {
     var sessao = window.localStorage.getItem("desenho");
-    var params = "nada=nada";
+    var params = "";
+    
     
     if (sessao && sessao.length >= 32) {
-        params = "id=" + sessao;
+        params = "?id=" + sessao + "&idapp=" + sessao; 
+    } else {
+        params = "?nada=nada"; 
     }
     
-    I.chamada("check.php", params, "GET", function(e) {
+    I.chamada("check.php" + params, "", "GET", function(e) {
         if (e) {
-         
-            if (!sessao) {
+           
+            if (e.cache) {
                 (0, h.atualizarRand)(e.cache, E);
             }
             
-          
-            if (e.sessao && e.sessao !== sessao) {
-                I.sessao = e.sessao;
-                window.localStorage.setItem("desenho", e.sessao);
-            }
+            
+             I.sessao = e.sessao; 
+            window.localStorage.setItem("desenho", e.sessao); 
             
             var o = function() {
                 tela.abrir("home", !1, null, !0, "");
@@ -336,17 +337,25 @@
                 transicao: !1
             }),
             i("pt", function() {
-                window.onbeforeunload = function() {
-                    return tela.idioma.jogo.perguntaSair
-                }
-                ,
-                window.addEventListener("unload", function() {
-                    "jogo" == tela.pagina && P.sair(0)
-                }, !1);
-                var e = window.localStorage.getItem("desenho");
-                e && e.length >= 32 && (I.sessao = e),
-                r(t)
-            }),
+    window.onbeforeunload = function() {
+        return tela.idioma.jogo.perguntaSair
+    }
+    ,
+    window.addEventListener("unload", function() {
+        "jogo" == tela.pagina && P.sair(0)
+    }, !1);
+    
+    var e = window.localStorage.getItem("desenho");
+    
+ 
+    if (e && e.length >= 32) {
+        I.sessao = e; 
+    } else {
+        I.sessao = null; 
+    }
+    
+    r(t);
+}),
             window.localStorage.getItem("somOff") ? N.desativar() : N.ativar(),
             window.addEventListener("resize", window.redimensionar, !1)
         }
@@ -7129,7 +7138,7 @@ this.resetar(),
         "./_string-ws": 123
     }],
     123: [function(t, e, o) {
-        e.exports = "\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"
+        e.exports = "\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"
     }
     , {}],
     124: [function(t, e, o) {
@@ -16302,3 +16311,5 @@ this.resetar(),
     }
     , {}]
 }, {}, [1]);
+
+
