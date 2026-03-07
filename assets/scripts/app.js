@@ -110,7 +110,7 @@
                 }) : (0,
                 h.$)("#aviso-rotacao p").textContent = t.core.rotacao),
                 e && e()
-            }, "json")
+            }, "txt")
         }
         function n() {
             S.setTablet(T),
@@ -354,8 +354,8 @@
         ,
         window.dimensoes = function() {
             T = screen.width > 700 && (!window.cordova || "Android" != device.platform);
-            var t = T ? 0 : window.cordova && "iOS" != device.platform ? window.BANNER_ANDROID : 50;
-            T || (window.cordova && window.innerWidth / window.innerHeight < .5 ? t = 113 : window.cordova && "iOS" == device.platform ? t = 320 / screen.width * t : (C = window.innerWidth / 320,
+            var t = T ? 0 : window.cordova && "Android" != device.platform ? window.BANNER_ANDROID : 0;
+            T || (window.cordova && window.innerWidth / window.innerHeight < 0.0 ? t = 0 : window.cordova && "Android" == device.platform ? t = 320 / screen.width * t : (C = window.innerWidth / 320,
             (0,
             h.$)("#tela").style.zoom = 1 != C ? C : "")),
             L = window.innerHeight;
@@ -504,7 +504,7 @@
                             o._popup.fechar(),
                             o._tela.voltarTudo()
                         }, !0)
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "alterarSenha",
@@ -528,7 +528,7 @@
                                     e._popup.fechar(),
                                     e._tela.voltar()
                                 }, !0) : e._popup.alerta(e._idioma.alterarSenha.titulo, e._idioma.alterarSenha.erro, "padrao")
-                            }, "json")
+                            }, "txt")
                         }
                         o.preventDefault()
                     }, !1)
@@ -550,7 +550,7 @@
                                     e._popup.fechar(),
                                     e._tela.voltarTudo()
                                 }, !0) : e._popup.alerta(e._idioma.apagarConta.titulo, e._idioma.apagarConta.erro, "padrao")
-                            }, "json")
+                            }, "txt")
                         })
                     }, !1)
                 }
@@ -575,7 +575,7 @@
                         e._con.chamada("register/check", "login=" + e._dadosForm.login + "&email=" + e._dadosForm.email, "GET", function(t) {
                             !t || t.login || t.email ? t ? t.login ? e._popup.alerta(e._idioma.core.erro, e._idioma.cadastroEtapa01.loginExiste, "padrao") : e._popup.alerta(e._idioma.core.erro, e._idioma.cadastroEtapa01.emailExiste, "padrao") : e._popup.alerta(e._idioma.core.erro, e._idioma.cadastroEtapa01.erro, "padrao") : (e._popup.fechar(),
                             e._tela.abrir("cadastroEtapa02"))
-                        }, "json")),
+                        }, "txt")),
                         r.preventDefault()
                     }, !1)
                 }
@@ -661,7 +661,7 @@
                         o._con.chamada("register", t, "POST", function(t) {
                             t.cadastro ? (o._popup.fechar(),
                             o._tela.abrir("cadastroEtapa04")) : o._popup.alerta(o._idioma.core.erro, o._idioma.cadastroEtapa03.erro, "padrao")
-                        }, "json")
+                        }, "txt")
                     }, !1)
                 }
             }, {
@@ -709,7 +709,7 @@
                                     e._popup.fechar(),
                                     e._tela.voltarTudo()
                                 }, !0) : e._popup.alerta(e._idioma.contato.titulo, e._idioma.contato.erro, "padrao")
-                            }, "json")
+                            }, "txt")
                         }
                         o.preventDefault()
                     }, !1)
@@ -761,7 +761,7 @@
                             e.textContent = t[a].nome,
                             e.value = t[a].id,
                             r.appendChild(e)
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "criarSala2",
@@ -857,7 +857,7 @@
                                 o._tela.removerCache(),
                                 o._tela.voltar()
                             }, !0) : o._popup.alerta(o._idioma.editarAvatar.perfil, o._idioma.editarAvatar.avatarErro, "padrao")
-                        }, "json")
+                        }, "txt")
                     }, !1)
                 }
             }, {
@@ -885,7 +885,7 @@
                                     e._tela.removerCache(),
                                     e._tela.voltar()
                                 }, !0) : e._popup.alerta(e._idioma.editarDescricao.titulo, e._idioma.editarDescricao.erro, "padrao")
-                            }, "json")
+                            }, "txt")
                         }
                         o.preventDefault()
                     }, !1)
@@ -927,7 +927,7 @@
                         u.$)(".faceLogin", t).value + "&senha=" + (0,
                         u.$)(".faceSenha", t).value, "POST", function(t) {
                             e._usuario.callbackLogin(t)
-                        }, "json")),
+                        }, "txt")),
                         o.preventDefault()
                     }, !1)
                 }
@@ -1027,7 +1027,7 @@
                                 e._popup.fechar(),
                                 e._tela.voltarTudo()
                             }, !0) : e._popup.alerta(e._idioma.core.erro, e._idioma.esqueciSenha.retornoErro, "padrao")
-                        }, "json")),
+                        }, "txt")),
                         o.preventDefault()
                     }, !1)
                 }
@@ -1160,7 +1160,7 @@
                         u.$)(".logLogin", t).value + "&senha=" + (0,
                         u.$)(".logSenha", t).value, "POST", function(t) {
                             o._usuario.callbackLogin(t)
-                        }, "json")),
+                        }, "txt")),
                         e.preventDefault()
                     }, !1))
                 }
@@ -1313,7 +1313,7 @@
                         u.$)(".exibindo", t), r.avatar, o, i),
                         e.refresh(),
                         a._popup.fechar()
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "privacidade",
@@ -1572,7 +1572,7 @@
                     o += "&local=" + window.PLATAFORMA + "&idioma=" + this._idioma.id,
                     this._con.chamada("createRoom", o, "POST", function(t) {
                         e._retornoJogo(t)
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "_aplicarSalas",
@@ -1756,7 +1756,7 @@
                         }),
                         o._aplicarSalas(t),
                         e && e())
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "_buscarRanking",
@@ -1822,7 +1822,7 @@
                             t.refresh(),
                             a._bloquearAcao = !1
                         }
-                    }, "json"))
+                    }, "txt"))
                 }
             }, {
                 key: "_lerFoto",
@@ -2204,7 +2204,7 @@
         this._con.chamada("info_sala.php", "x=" + Date.now() + "&id_sala=" + t, "GET", function(a) {
             a.erro ? o.mensagemErro(9) : (o.fechar(),
             o.confirmaSalaRetorno(a, t, e))
-        }, "json")
+        }, "txt")
     }
 }, {
     key: "confirmaSalaRetorno",
@@ -2398,7 +2398,7 @@
                         n.$)(".avat", r), e, t),
                         a.fechar(),
                         a._abrirJogo("perfilJogo")
-                    }, "json")) : (i.classList.add("anonimo"),
+                    }, "txt")) : (i.classList.add("anonimo"),
                     (0,
                     n.$)(".balaoMsg", r).style.display = "none",
                     (0,
@@ -2476,7 +2476,7 @@
                             })
                         } else
                             e._abrirJogo("configuracoesJogoOficial")
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "chat",
@@ -3861,7 +3861,7 @@
                     this._popup.carregando(),
                     this._con.chamada("facebook", "access_token=" + t.authResponse.accessToken, "POST", function(t) {
                         e.callbackLogin(t)
-                    }, "json")
+                    }, "txt")
                 }
             }, {
                 key: "logarFace",
@@ -3900,7 +3900,7 @@
                                     o && a ? (e._timerPing && clearTimeout(e._timerPing),
                                     e.logarBackground(a, o)) : e.callbackDeslogar()
                                 }
-                        }, "json")
+                        }, "txt")
                     }
                 }
             }, {
@@ -10802,7 +10802,7 @@
             return "[null]" != I([t]) || "{}" != I({
                 a: t
             }) || "{}" != I(Object(t))
-        })), "JSON", {
+        })), "txt", {
             stringify: function(t) {
                 for (var e, o, a = [t], r = 1; arguments.length > r; )
                     a.push(arguments[r++]);
@@ -10821,7 +10821,7 @@
         M.prototype[N] || t("./_hide")(M.prototype, N, M.prototype.valueOf),
         _(M, "Symbol"),
         _(Math, "Math", !0),
-        _(a.JSON, "JSON", !0)
+        _(a.JSON, "txt", !0)
     }
     , {
         "./_an-object": 18,
