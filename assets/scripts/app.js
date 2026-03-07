@@ -3749,97 +3749,120 @@
             }
             return i(e, t),
             n(e, [{
-    key: "logar",
-    value: function(t, e, o) {
-        var a = this;
-        this._popup.carregando(),
-        this._con.chamada("login.php", "login=" + t + "&senha=" + e, "POST", function(t) {
-            a.callbackLogin(t)
-        }, "txt")
-    }
+key: "logar",
+value: function(t, e, o) {
+var a = this;
+this._popup.carregando(),
+this._con.chamada("login.php", "login=" + t + "&senha=" + e, "POST", function(response) {
+if (response && !response.erro && !response.banido) {
+window.localStorage.setItem("nick", t);
+window.localStorage.setItem("senha", e);
+}
+a.callbackLogin(response)
+}, "txt")
+}
 }, {
-    key: "logarBackground",
-    value: function(t, e, o) {
-        var a = this;
-        this._con.chamada("login.php", "login=" + t + "&senha=" + e, "POST", function(t) {
-            !t || t.erro || t.banido ? a.callbackDeslogar() : a.dados = t,
-            o && o()
-        }, "txt")
-    }
+key: "logarBackground",
+value: function(t, e, o) {
+var a = this;
+this._con.chamada("login.php", "login=" + t + "&senha=" + e, "POST", function(response) {
+if (response && !response.erro && !response.banido) {
+window.localStorage.setItem("nick", t);
+window.localStorage.setItem("senha", e);
+a.dados = response;
+} else {
+a.callbackDeslogar();
+}
+o && o();
+}, "txt")
+}
 }, {
-    key: "deslogar",
-    value: function() {
-        var t = this;
-        this._popup.carregando(),
-        this._con.chamada("deslogar.php", "nada=nada", "POST", function(e) {
-            t._popup.fechar(),
-            t.resetar(),
-            t.callbackDeslogar()
-        }, "txt"),
-        FB.getLoginStatus(function(t) {
-            "connected" === t.status && FB.logout();
-        });
-    }
+key: "deslogar",
+value: function() {
+var t = this;
+this._popup.carregando(),
+this._con.chamada("deslogar.php", "nada=nada", "POST", function(e) {
+t._popup.fechar(),
+t.resetar(),
+t.callbackDeslogar()
+}, "txt"),
+FB.getLoginStatus(function(t) {
+"connected" === t.status && FB.logout();
+});
+}
 }, {
-                key: "callbackLogin",
-                value: function(t) {
-                    var e = this;
-                    if (this._popup.fechar(),
-                    !t || t.erro || t.banido)
-                        if (t.banido) {
-                            var o = 1 == this._idioma.id ? t.motivo : null
-                              , a = null
-                              , r = t.codigo ? t.codigo.split("#") : null;
-                            r && "j" == r[0] && r[1] && (a = function() {
-                                e._popup.fechar(),
-                                window.open("https://gartic.com.br/log_ban.php?id=" + r[1] + "&login=" + t.loginBan, "_blank")
-                            }
-                            ),
-                            this._popup.mensagemErro(6, a, o)
-                        } else if (this._tela.pagina)
-                            switch (this._tela.pagina) {
-                            case "formaCadastro":
-                                this._tela.abrir("entrarFacebook", null, t.facebook);
-                                break;
-                            case "entrarFaceEtp02":
-                                this._popup.alerta(this._idioma.core.erro, this._idioma.entrarFaceEtp02.erroLogin, "padrao");
-                                break;
-                            default:
-                                t.excluido ? this._popup.alerta(this._idioma.popups.erro, this._idioma.login.excluido, "padrao") : t.facebook ? this._popup.alerta(this._idioma.popups.loginTit, this._idioma.popups.loginTxt, "login", function() {
-                                    e._popup.fechar(),
-                                    e._tela.abrir("entrarFacebook", null, t.facebook)
-                                }, !1, !1, this._idioma.popups.loginBt) : 3 == t.erro ? this._popup.alerta(this._idioma.popups.erro, this._idioma.popups.erroFacebook, "padrao") : this._popup.alerta(this._idioma.core.erro, this._idioma.login.erro, "padrao")
-                            }
-                        else
-                            this._tela.voltarTudo();
-                    else
-                        this.dados = t,
-                        "home" != this._tela.pagina && ("entrarFaceEtp02" == this._tela.pagina ? this._popup.alerta(this._idioma.popups.parabensTit, this._idioma.popups.parabensTxt01, "parabens", function() {
-                            e._popup.fechar(),
-                            e._tela.voltarTudo()
-                        }, !0) : "formaCadastro" == this._tela.pagina ? this._popup.alerta(this._idioma.popups.cadastroTit, this._idioma.popups.cadastroTxt, "cadastro", function() {
-                            e._popup.fechar(),
-                            e._tela.voltarTudo()
-                        }, !0) : "login" == this._tela.pagina && t.facebook ? this._popup.alerta(this._idioma.popups.parabensTit, this._idioma.popups.parabensTxt02, "parabens", function() {
-                            e._popup.fechar(),
-                            e._tela.voltar(3)
-                        }, !0) : "login" == this._tela.pagina ? this._tela.voltar() : this._tela.voltarTudo())
-                }
-            }, {
-                key: "resetar",
-                value: function() {
-                    this.escolherNick(),
-                    this._timerPing && clearTimeout(this._timerPing),
-                    window.localStorage.removeItem("nick"),
-                    window.localStorage.removeItem("senha")
-                }
-            }, {
-                key: "callbackDeslogar",
-                value: function() {
-                    this.resetar(),
-                    "home" == this._tela.pagina ? s(e.prototype.__proto__ || Object.getPrototypeOf(e.prototype), "emit", this).call(this, "loginHome") : "acesso" == this._tela.pagina ? s(e.prototype.__proto__ || Object.getPrototypeOf(e.prototype), "emit", this).call(this, "loginAcesso") : this._tela.voltarTudo()
-                }
-            }, {
+key: "callbackLogin",
+value: function(t) {
+var e = this;
+if (this._popup.fechar(),
+!t || t.erro || t.banido)
+if (t.banido) {
+var o = 1 == this._idioma.id ? t.motivo : null
+, a = null
+, r = t.codigo ? t.codigo.split("#") : null;
+r && "j" == r[0] && r[1] && (a = function() {
+e._popup.fechar(),
+window.open("https://gartic.com.br/log_ban.php?id=" + r[1] + "&login=" + t.loginBan, "_blank")
+}
+),
+this._popup.mensagemErro(6, a, o)
+} else if (this._tela.pagina)
+switch (this._tela.pagina) {
+case "formaCadastro":
+this._tela.abrir("entrarFacebook", null, t.facebook);
+break;
+case "entrarFaceEtp02":
+this._popup.alerta(this._idioma.core.erro, this._idioma.entrarFaceEtp02.erroLogin, "padrao");
+break;
+default:
+t.excluido ? this._popup.alerta(this._idioma.popups.erro, this._idioma.login.excluido, "padrao") : t.facebook ? this._popup.alerta(this._idioma.popups.loginTit, this._idioma.popups.loginTxt, "login", function() {
+e._popup.fechar(),
+e._tela.abrir("entrarFacebook", null, t.facebook)
+}, !1, !1, this._idioma.popups.loginBt) : 3 == t.erro ? this._popup.alerta(this._idioma.popups.erro, this._idioma.popups.erroFacebook, "padrao") : this._popup.alerta(this._idioma.core.erro, this._idioma.login.erro, "padrao")
+}
+else
+this._tela.voltarTudo();
+else {
+this.dados = t;
+if ("home" != this._tela.pagina) {
+if ("entrarFaceEtp02" == this._tela.pagina) {
+this._popup.alerta(this._idioma.popups.parabensTit, this._idioma.popups.parabensTxt01, "parabens", function() {
+e._popup.fechar(),
+e._tela.voltarTudo()
+}, !0);
+} else if ("formaCadastro" == this._tela.pagina) {
+this._popup.alerta(this._idioma.popups.cadastroTit, this._idioma.popups.cadastroTxt, "cadastro", function() {
+e._popup.fechar(),
+e._tela.voltarTudo()
+}, !0);
+} else if ("login" == this._tela.pagina && t.facebook) {
+this._popup.alerta(this._idioma.popups.parabensTit, this._idioma.popups.parabensTxt02, "parabens", function() {
+e._popup.fechar(),
+e._tela.voltar(3)
+}, !0);
+} else if ("login" == this._tela.pagina) {
+this._tela.voltar();
+} else {
+this._tela.voltarTudo();
+}
+}
+}
+}
+}, {
+key: "resetar",
+value: function() {
+this.escolherNick(),
+this._timerPing && clearTimeout(this._timerPing),
+window.localStorage.removeItem("nick"),
+window.localStorage.removeItem("senha")
+}
+}, {
+key: "callbackDeslogar",
+value: function() {
+this.resetar(),
+"home" == this._tela.pagina ? s(e.prototype.proto || Object.getPrototypeOf(e.prototype), "emit", this).call(this, "loginHome") : "acesso" == this._tela.pagina ? s(e.prototype.proto || Object.getPrototypeOf(e.prototype), "emit", this).call(this, "loginAcesso") : this._tela.voltarTudo()
+}
+}, {
                 key: "escolherNick",
                 value: function() {
                     var t = window.localStorage.getItem("nickAnonimo")
