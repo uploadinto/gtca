@@ -39,7 +39,7 @@ function r(t) {
     var params = "";
     
     
-    if (sessao && sessao.length >= 32) {
+    if (sessao && sessao.length >= 33) {
         params = "?id=" + sessao + "&idapp=" + sessao; 
     } else {
         params = "?nada=nada"; 
@@ -348,7 +348,7 @@ function r(t) {
     var e = window.localStorage.getItem("desenho");
     
  
-    if (e && e.length >= 32) {
+    if (e && e.length >= 33) {
         I.sessao = e; 
     } else {
         I.sessao = null; 
