@@ -35,23 +35,23 @@
             }
         }
    function r(t) {
- 
     var sessao = window.localStorage.getItem("desenho");
     var params = "nada=nada";
     
-   
     if (sessao && sessao.length >= 32) {
         params = "id=" + sessao;
     }
     
     I.chamada("check.php", params, "GET", function(e) {
         if (e) {
-          
-            (0, h.atualizarRand)(e.cache, E);
-            
          
-            if (e.sessao) {
-                I.sessao = e.sessao; 
+            if (!sessao) {
+                (0, h.atualizarRand)(e.cache, E);
+            }
+            
+          
+            if (e.sessao && e.sessao !== sessao) {
+                I.sessao = e.sessao;
                 window.localStorage.setItem("desenho", e.sessao);
             }
             
@@ -90,7 +90,6 @@
                 }
             }
         } else {
-           
             r(t);
         }
     }, "txt");
