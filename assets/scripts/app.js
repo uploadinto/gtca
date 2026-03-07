@@ -34,28 +34,23 @@
                 default: t
             }
         }
-function r(t) {
-   
-    var sessao = window.localStorage.getItem("desenho") || null;
+   function r(t) {
+    var sessao = window.localStorage.getItem("desenho");
+    var params = "nada=nada";
     
- 
-    var params = "x=" + Date.now();
-    if (sessao) {
-        params += "&id=" + sessao;
-    } else {
-        params += "&nada=nada";
+    if (sessao && sessao.length >= 32) {
+        params = "id=" + sessao;
     }
     
     I.chamada("check.php", params, "GET", function(e) {
         if (e) {
-           
-            if (e.cache) {
+         
+            if (!sessao) {
                 (0, h.atualizarRand)(e.cache, E);
             }
             
-            
           
-            if (e.sessao && !sessao) {
+            if (e.sessao && e.sessao !== sessao) {
                 I.sessao = e.sessao;
                 window.localStorage.setItem("desenho", e.sessao);
             }
@@ -341,25 +336,17 @@ function r(t) {
                 transicao: !1
             }),
             i("pt", function() {
-    window.onbeforeunload = function() {
-        return tela.idioma.jogo.perguntaSair
-    }
-    ,
-    window.addEventListener("unload", function() {
-        "jogo" == tela.pagina && P.sair(0)
-    }, !1);
-    
-    var e = window.localStorage.getItem("desenho");
-    
- 
-    if (e && e.length >= 33) {
-        I.sessao = e; 
-    } else {
-        I.sessao = null; 
-    }
-    
-    r(t);
-}),
+                window.onbeforeunload = function() {
+                    return tela.idioma.jogo.perguntaSair
+                }
+                ,
+                window.addEventListener("unload", function() {
+                    "jogo" == tela.pagina && P.sair(0)
+                }, !1);
+                var e = window.localStorage.getItem("desenho");
+                e && e.length >= 32 && (I.sessao = e),
+                r(t)
+            }),
             window.localStorage.getItem("somOff") ? N.desativar() : N.ativar(),
             window.addEventListener("resize", window.redimensionar, !1)
         }
@@ -16315,5 +16302,3 @@ this.resetar(),
     }
     , {}]
 }, {}, [1]);
-
-
