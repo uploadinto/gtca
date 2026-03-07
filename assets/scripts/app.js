@@ -52,9 +52,7 @@ function r(t) {
                 (0, h.atualizarRand)(e.cache, E);
             }
             
-            
-             I.sessao = e.sessao; 
-            window.localStorage.setItem("desenho", e.sessao); 
+
             
             var o = function() {
                 tela.abrir("home", !1, null, !0, "");
