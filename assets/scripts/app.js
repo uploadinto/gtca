@@ -35,24 +35,30 @@
             }
         }
 function r(t) {
-    var sessao = window.localStorage.getItem("desenho");
-    var params = "";
+   
+    var sessao = window.localStorage.getItem("desenho") || null;
     
-    
-    if (sessao && sessao.length >= 33) {
-        params = "?id=" + sessao + "&idapp=" + sessao; 
+ 
+    var params = "x=" + Date.now();
+    if (sessao) {
+        params += "&id=" + sessao;
     } else {
-        params = "?nada=nada"; 
+        params += "&nada=nada";
     }
     
-    I.chamada("check.php" + params, "", "GET", function(e) {
+    I.chamada("check.php", params, "GET", function(e) {
         if (e) {
            
             if (e.cache) {
                 (0, h.atualizarRand)(e.cache, E);
             }
             
-
+            
+          
+            if (e.sessao && !sessao) {
+                I.sessao = e.sessao;
+                window.localStorage.setItem("desenho", e.sessao);
+            }
             
             var o = function() {
                 tela.abrir("home", !1, null, !0, "");
